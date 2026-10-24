@@ -1,0 +1,60 @@
+{
+  "container_runtime": {
+    "daemon_or_service": {
+      "available": false,
+      "error": "Docker/Podman executable not found"
+    },
+    "path": null
+  },
+  "host": {
+    "cgroup_v2": true,
+    "effective_capabilities": "00000000800405fb",
+    "kernel": "6.18.55",
+    "platform": "linux",
+    "python": "3.13.5",
+    "uid": 0
+  },
+  "ip": {
+    "link": {
+      "available": true,
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> \neth0             UP             b2:ea:65:ff:3a:d3 <BROADCAST,MULTICAST,UP,LOWER_UP>"
+    },
+    "path": "/usr/sbin/ip"
+  },
+  "network_namespace": {
+    "available": true,
+    "exit_code": 1,
+    "stderr": "unshare: unshare failed: Operation not permitted",
+    "stdout": ""
+  },
+  "nftables": {
+    "path": null,
+    "version": {
+      "available": false,
+      "error": "nft executable not found"
+    }
+  },
+  "note": "Read-only preflight. It does not build images, start containers, create namespaces, or alter firewall rules.",
+  "readiness": {
+    "full_isolation_gate": false,
+    "host_firewall_tests": false,
+    "network_namespace_tests": false,
+    "real_container_tests": false
+  },
+  "scanner_tools": {
+    "nuclei": {
+      "available": false,
+      "path": null
+    },
+    "trivy": {
+      "available": false,
+      "path": null
+    },
+    "zap": {
+      "available": false,
+      "path": null
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "description": "Sanitized local fixtures for deterministic AppSec detector regression; no external targets.",
+  "cases": [
+    {"id":"headers-positive-1","label":true,"category":"security_headers","fixture":{"headers":{"server":"Example"}},"expected":"missing security headers"},
+    {"id":"headers-negative-1","label":false,"category":"security_headers","fixture":{"headers":{"content-security-policy":"default-src 'self'","x-content-type-options":"nosniff","strict-transport-security":"max-age=31536000"}},"expected":"required headers present"},
+    {"id":"cookie-positive-1","label":true,"category":"cookie_flags","fixture":{"set_cookie":"session=REDACTED; Path=/"},"expected":"cookie missing Secure HttpOnly SameSite"},
+    {"id":"cookie-negative-1","label":false,"category":"cookie_flags","fixture":{"set_cookie":"session=REDACTED; Secure; HttpOnly; SameSite=Lax"},"expected":"cookie flags present"},
+    {"id":"cache-positive-1","label":true,"category":"cache_policy","fixture":{"status":200,"content_type":"application/json","cache_control":"public, max-age=3600","sensitive":true},"expected":"sensitive response cacheable"},
+    {"id":"cache-negative-1","label":false,"category":"cache_policy","fixture":{"status":200,"content_type":"application/json","cache_control":"no-store","sensitive":true},"expected":"sensitive response not cacheable"},
+    {"id":"content-type-positive-1","label":true,"category":"content_type","fixture":{"status":200,"content_type":"text/html","body_prefix":"{\"account\":1}"},"expected":"JSON-like body mislabeled as HTML"},
+    {"id":"content-type-negative-1","label":false,"category":"content_type","fixture":{"status":200,"content_type":"application/json","body_prefix":"{\"status\":\"ok\"}"},"expected":"JSON body has JSON content type"}
+  ]
+}

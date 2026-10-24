@@ -1,0 +1,80 @@
+{
+  "name": "Payment workflow invariants \u2014 example only",
+  "not_executable": true,
+  "states": [
+    "created",
+    "pending",
+    "paid",
+    "cancelled",
+    "expired",
+    "fulfilled"
+  ],
+  "allowed_transitions": [
+    [
+      "created",
+      "pending"
+    ],
+    [
+      "pending",
+      "paid"
+    ],
+    [
+      "created",
+      "cancelled"
+    ],
+    [
+      "pending",
+      "cancelled"
+    ],
+    [
+      "pending",
+      "expired"
+    ],
+    [
+      "paid",
+      "fulfilled"
+    ]
+  ],
+  "invariants": [
+    {
+      "id": "BL-001",
+      "statement": "An order is not fulfilled before payment is verified server-side.",
+      "verification": "Assert seeded unpaid order cannot be fulfilled through any user-facing endpoint."
+    },
+    {
+      "id": "BL-002",
+      "statement": "Payment callbacks are authenticated.",
+      "verification": "In provider sandbox, submit an invalid-signature fixture and assert order state is unchanged."
+    },
+    {
+      "id": "BL-003",
+      "statement": "Duplicate callbacks are idempotent.",
+      "verification": "Replay the same disposable provider event and assert no duplicate ledger/fulfilment side effects."
+    },
+    {
+      "id": "BL-004",
+      "statement": "Order amount, currency, merchant, and order reference are verified against server-side records.",
+      "verification": "Use seeded mismatched fixtures; assert no paid/fulfilled transition."
+    },
+    {
+      "id": "BL-005",
+      "statement": "One test user cannot read or alter another test user's order.",
+      "verification": "Use two separate test identities and seeded objects; assert per-operation authorization."
+    },
+    {
+      "id": "BL-006",
+      "statement": "Cancelled or expired orders do not transition to paid through unsupported paths.",
+      "verification": "Use disposable orders and documented reconciliation path only."
+    },
+    {
+      "id": "BL-007",
+      "statement": "Fulfilment side effects are idempotent.",
+      "verification": "Assert duplicate confirmations do not generate duplicate entitlements/ledger effects."
+    },
+    {
+      "id": "BL-008",
+      "statement": "Sensitive business operations have server-enforced eligibility/rate constraints.",
+      "verification": "Run only a bounded, approved test case against a test-only fixture."
+    }
+  ]
+}

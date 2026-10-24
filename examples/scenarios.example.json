@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "description": "Example read-only scenarios. Replace paths, credential environment variable names, IDs, and expected permissions with lab fixture values. Scenarios are disabled until marked enabled.",
+  "scenarios": [
+    {
+      "id": "anonymous-profile-denied",
+      "enabled": false,
+      "safe_for_automation": true,
+      "description": "Anonymous user should not access profile endpoint.",
+      "category": [
+        "A01:2025",
+        "A07:2025",
+        "API2:2023",
+        "CWE-306"
+      ],
+      "requests": [
+        {
+          "name": "anonymous",
+          "method": "GET",
+          "path": "/api/profile",
+          "auth": "anonymous"
+        }
+      ],
+      "assertions": [
+        {
+          "type": "status_in",
+          "step": "anonymous",
+          "values": [
+            401,
+            403
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cross-user-order-access",
+      "enabled": false,
+      "safe_for_automation": true,
+      "description": "User B must not read user A's seeded test order.",
+      "category": [
+        "A01:2025",
+        "API1:2023",
+        "CWE-862",
+        "CWE-639",
+        "BL-005"
+      ],
+      "requests": [
+        {
+          "name": "user-b-reads-user-a-order",
+          "method": "GET",
+          "path": "/api/orders/${LAB_ORDER_A_ID}",
+          "auth": "LAB_TOKEN_USER_B"
+        }
+      ],
+      "assertions": [
+        {
+          "type": "status_in",
+          "step": "user-b-reads-user-a-order",
+          "values": [
+            403,
+            404
+          ]
+        }
+      ]
+    }
+  ]
+}

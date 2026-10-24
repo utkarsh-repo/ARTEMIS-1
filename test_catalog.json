@@ -1,0 +1,590 @@
+{
+  "schema_version": "1.0",
+  "frameworks": {
+    "OWASP Top 10:2025": [
+      {
+        "id": "A01:2025",
+        "name": "Broken Access Control",
+        "coverage": "scenario_required",
+        "tests": [
+          "anonymous_auth_boundary",
+          "scenario_suite"
+        ],
+        "notes": "Role/object matrix requires dedicated test identities and known expected permissions."
+      },
+      {
+        "id": "A02:2025",
+        "name": "Security Misconfiguration",
+        "coverage": "implemented",
+        "tests": [
+          "security_headers",
+          "cookie_flags",
+          "technology_disclosure",
+          "cache_policy",
+          "content_type",
+          "cors_preflight",
+          "http_method_surface"
+        ]
+      },
+      {
+        "id": "A03:2025",
+        "name": "Software Supply Chain Failures",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ],
+        "notes": "Use SCA/SBOM/lockfile scanners; SARIF can be imported."
+      },
+      {
+        "id": "A04:2025",
+        "name": "Cryptographic Failures",
+        "coverage": "partial",
+        "tests": [
+          "cookie_flags"
+        ],
+        "notes": "TLS/cipher configuration and data-at-rest cryptography require TLS scanning and design/code review."
+      },
+      {
+        "id": "A05:2025",
+        "name": "Injection",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite",
+          "error_surface"
+        ],
+        "notes": "Use app-owned, low-impact cases in a disposable lab; no model-generated exploit payloads."
+      },
+      {
+        "id": "A06:2025",
+        "name": "Insecure Design",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ],
+        "notes": "Requires explicit business rules and state machine."
+      },
+      {
+        "id": "A07:2025",
+        "name": "Authentication Failures",
+        "coverage": "scenario_required",
+        "tests": [
+          "anonymous_auth_boundary",
+          "scenario_suite"
+        ],
+        "notes": "Full session/token lifecycle tests need defined expectations and dedicated accounts."
+      },
+      {
+        "id": "A08:2025",
+        "name": "Software or Data Integrity Failures",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ],
+        "notes": "Signature/callback and integrity behavior requires fixtures."
+      },
+      {
+        "id": "A09:2025",
+        "name": "Security Logging and Alerting Failures",
+        "coverage": "manual_review_required",
+        "tests": [
+          "sarif_import"
+        ],
+        "notes": "Requires authorized audit-log and alert-system access."
+      },
+      {
+        "id": "A10:2025",
+        "name": "Mishandling of Exceptional Conditions",
+        "coverage": "implemented",
+        "tests": [
+          "error_surface"
+        ],
+        "notes": "HTTP status/error exposure checks are partial, not full exception-path coverage."
+      }
+    ],
+    "OWASP API Security Top 10:2023": [
+      {
+        "id": "API1:2023",
+        "name": "Broken Object Level Authorization",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "API2:2023",
+        "name": "Broken Authentication",
+        "coverage": "scenario_required",
+        "tests": [
+          "anonymous_auth_boundary",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "API3:2023",
+        "name": "Broken Object Property Level Authorization",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "API4:2023",
+        "name": "Unrestricted Resource Consumption",
+        "coverage": "partial",
+        "tests": [
+          "request_budget"
+        ],
+        "notes": "Only low-rate observations are available here; load/stress testing needs a separately approved harness."
+      },
+      {
+        "id": "API5:2023",
+        "name": "Broken Function Level Authorization",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "API6:2023",
+        "name": "Unrestricted Access to Sensitive Business Flows",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite",
+          "workflow_invariants"
+        ]
+      },
+      {
+        "id": "API7:2023",
+        "name": "Server Side Request Forgery",
+        "coverage": "manual_review_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Requires a controlled callback sink and a purpose-built fixture; no blind SSRF tests are sent."
+      },
+      {
+        "id": "API8:2023",
+        "name": "Security Misconfiguration",
+        "coverage": "implemented",
+        "tests": [
+          "security_headers",
+          "cookie_flags",
+          "cors_preflight",
+          "http_method_surface"
+        ]
+      },
+      {
+        "id": "API9:2023",
+        "name": "Improper Inventory Management",
+        "coverage": "implemented",
+        "tests": [
+          "openapi_inventory"
+        ]
+      },
+      {
+        "id": "API10:2023",
+        "name": "Unsafe Consumption of APIs",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Requires a mock upstream or controlled integration fixture."
+      }
+    ],
+    "CWE Top 25:2025": [
+      {
+        "id": "CWE-79",
+        "name": "Cross-site Scripting",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Reflected marker checks are not a complete XSS test."
+      },
+      {
+        "id": "CWE-89",
+        "name": "SQL Injection",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Use deliberately authored safe test cases in an isolated lab."
+      },
+      {
+        "id": "CWE-352",
+        "name": "Cross-Site Request Forgery",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Requires state-changing form/API fixture and expected CSRF control."
+      },
+      {
+        "id": "CWE-862",
+        "name": "Missing Authorization",
+        "coverage": "scenario_required",
+        "tests": [
+          "anonymous_auth_boundary",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-787",
+        "name": "Out-of-bounds Write",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ],
+        "notes": "Needs source analysis, fuzzing, or runtime instrumentation."
+      },
+      {
+        "id": "CWE-22",
+        "name": "Path Traversal",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Requires safe fixture with a known non-sensitive sentinel file."
+      },
+      {
+        "id": "CWE-416",
+        "name": "Use After Free",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ],
+        "notes": "Needs code-level analysis or memory-safety instrumentation."
+      },
+      {
+        "id": "CWE-125",
+        "name": "Out-of-bounds Read",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ]
+      },
+      {
+        "id": "CWE-78",
+        "name": "OS Command Injection",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ],
+        "notes": "Only app-specific inert test cases; no command execution payloads generated by the model."
+      },
+      {
+        "id": "CWE-94",
+        "name": "Code Injection",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-120",
+        "name": "Classic Buffer Overflow",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ]
+      },
+      {
+        "id": "CWE-434",
+        "name": "Unrestricted Upload of Dangerous File Type",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-476",
+        "name": "NULL Pointer Dereference",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ]
+      },
+      {
+        "id": "CWE-121",
+        "name": "Stack-based Buffer Overflow",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ]
+      },
+      {
+        "id": "CWE-502",
+        "name": "Deserialization of Untrusted Data",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-122",
+        "name": "Heap-based Buffer Overflow",
+        "coverage": "external_tool_required",
+        "tests": [
+          "sarif_import"
+        ]
+      },
+      {
+        "id": "CWE-863",
+        "name": "Incorrect Authorization",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-20",
+        "name": "Improper Input Validation",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-284",
+        "name": "Improper Access Control",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-200",
+        "name": "Exposure of Sensitive Information",
+        "coverage": "implemented",
+        "tests": [
+          "error_surface",
+          "technology_disclosure"
+        ],
+        "notes": "Only response-level leakage indicators are covered."
+      },
+      {
+        "id": "CWE-306",
+        "name": "Missing Authentication for Critical Function",
+        "coverage": "scenario_required",
+        "tests": [
+          "anonymous_auth_boundary",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-918",
+        "name": "SSRF",
+        "coverage": "manual_review_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-77",
+        "name": "Command Injection",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-639",
+        "name": "Authorization Bypass Through User-Controlled Key",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "CWE-770",
+        "name": "Allocation of Resources Without Limits or Throttling",
+        "coverage": "partial",
+        "tests": [
+          "request_budget"
+        ],
+        "notes": "This tool's own request budget is not a target-side resource limit validation."
+      }
+    ],
+    "Business Logic": [
+      {
+        "id": "BL-001",
+        "name": "Unauthorized state transition",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-002",
+        "name": "Payment callback authenticity",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-003",
+        "name": "Replay/idempotency",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-004",
+        "name": "Amount/currency/order integrity",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-005",
+        "name": "Cross-account object access",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-006",
+        "name": "Duplicate fulfilment/ledger effects",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-007",
+        "name": "Expired/cancelled resource resurrection",
+        "coverage": "scenario_required",
+        "tests": [
+          "workflow_invariants",
+          "scenario_suite"
+        ]
+      },
+      {
+        "id": "BL-008",
+        "name": "Sensitive business flow abuse",
+        "coverage": "scenario_required",
+        "tests": [
+          "scenario_suite"
+        ]
+      }
+    ]
+  },
+  "runnable_tests": [
+    {
+      "id": "security_headers",
+      "name": "Security response headers",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 10,
+      "methods": []
+    },
+    {
+      "id": "cookie_flags",
+      "name": "Set-Cookie security flags",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 9,
+      "methods": []
+    },
+    {
+      "id": "technology_disclosure",
+      "name": "Technology disclosure headers",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 6,
+      "methods": []
+    },
+    {
+      "id": "cache_policy",
+      "name": "Cache policy review",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 5,
+      "methods": []
+    },
+    {
+      "id": "content_type",
+      "name": "Content-Type and nosniff review",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 7,
+      "methods": []
+    },
+    {
+      "id": "cors_preflight",
+      "name": "CORS preflight behavior",
+      "risk": "low",
+      "kind": "request",
+      "priority": 8,
+      "methods": [
+        "OPTIONS"
+      ]
+    },
+    {
+      "id": "http_method_surface",
+      "name": "HTTP method surface via OPTIONS",
+      "risk": "low",
+      "kind": "request",
+      "priority": 4,
+      "methods": [
+        "OPTIONS"
+      ]
+    },
+    {
+      "id": "error_surface",
+      "name": "Error/exception surface review",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 7,
+      "methods": []
+    },
+    {
+      "id": "anonymous_auth_boundary",
+      "name": "Anonymous access to protected read paths",
+      "risk": "low",
+      "kind": "scenario",
+      "priority": 8,
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "id": "openapi_inventory",
+      "name": "OpenAPI inventory review",
+      "risk": "low",
+      "kind": "analyze",
+      "priority": 5,
+      "methods": []
+    },
+    {
+      "id": "scenario_suite",
+      "name": "Declared application-specific security scenarios",
+      "risk": "configured",
+      "kind": "scenario",
+      "priority": 9,
+      "methods": [
+        "GET",
+        "HEAD"
+      ]
+    },
+    {
+      "id": "workflow_invariants",
+      "name": "Business workflow invariants",
+      "risk": "configured",
+      "kind": "workflow",
+      "priority": 9,
+      "methods": []
+    }
+  ]
+}

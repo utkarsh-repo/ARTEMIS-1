@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "generated_date": "2026-10-24",
+  "scope": "Observed Python 3.13.5 validation environment; not an exact release SBOM. Direct dependency constraints come from requirements.txt. Versions may differ in another environment because requirements are not lockfile-pinned.",
+  "manifest": "requirements.txt",
+  "runtime_dependencies": [
+    {
+      "name": "requests",
+      "version_observed": "2.32.5",
+      "requirement": "requests>=2.32.0,<3.0.0",
+      "direct": true,
+      "license": "Apache-2.0",
+      "source": "https://github.com/psf/requests",
+      "license_file": "requests-2.32.5.dist-info/licenses/LICENSE"
+    },
+    {
+      "name": "urllib3",
+      "version_observed": "2.7.0",
+      "direct": false,
+      "via": "requests",
+      "license": "MIT",
+      "source": "https://github.com/urllib3/urllib3",
+      "license_file": "urllib3-2.7.0.dist-info/licenses/LICENSE.txt"
+    },
+    {
+      "name": "certifi",
+      "version_observed": "2026.5.20",
+      "direct": false,
+      "via": "requests",
+      "license": "MPL-2.0",
+      "source": "https://github.com/certifi/python-certifi",
+      "license_file": "certifi-2026.5.20.dist-info/licenses/LICENSE"
+    },
+    {
+      "name": "charset-normalizer",
+      "version_observed": "3.4.7",
+      "direct": false,
+      "via": "requests",
+      "license": "MIT",
+      "source": "https://github.com/jawah/charset_normalizer",
+      "license_file": "charset_normalizer-3.4.7.dist-info/licenses/LICENSE"
+    },
+    {
+      "name": "idna",
+      "version_observed": "3.17",
+      "direct": false,
+      "via": "requests",
+      "license": "BSD-3-Clause",
+      "source": "https://github.com/kjd/idna",
+      "license_file": "idna-3.17.dist-info/licenses/LICENSE.md"
+    }
+  ],
+  "test_only_observed": [
+    {
+      "name": "pytest",
+      "version_observed": "9.0.2",
+      "license": "MIT",
+      "source": "https://github.com/pytest-dev/pytest",
+      "license_file": "pytest-9.0.2.dist-info/licenses/LICENSE"
+    },
+    {
+      "name": "pluggy",
+      "version_observed": "1.6.0",
+      "license": "MIT",
+      "source": "https://github.com/pytest-dev/pluggy",
+      "license_file": "pluggy-1.6.0.dist-info/licenses/LICENSE"
+    },
+    {
+      "name": "iniconfig",
+      "version_observed": "2.3.0",
+      "license": "MIT",
+      "source": "https://github.com/pytest-dev/iniconfig",
+      "license_file": "iniconfig-2.3.0.dist-info/licenses/LICENSE"
+    },
+    {
+      "name": "packaging",
+      "version_observed": "25.0",
+      "license": "Multiple bundled license texts reported in installed metadata",
+      "source": "https://github.com/pypa/packaging",
+      "license_files": [
+        "packaging-25.0.dist-info/licenses/LICENSE",
+        "packaging-25.0.dist-info/licenses/LICENSE.APACHE",
+        "packaging-25.0.dist-info/licenses/LICENSE.BSD"
+      ]
+    }
+  ],
+  "upstream_architecture_references": [
+    {
+      "name": "Cairn",
+      "url": "https://github.com/oritera/Cairn",
+      "treatment": "Architecture/reference material per repository provenance register; exact revision and source-copy analysis remain to be recorded."
+    },
+    {
+      "name": "Cairn dispatcher design",
+      "url": "https://github.com/oritera/Cairn/blob/main/docs/specs/dispatcher-design.md",
+      "treatment": "Architecture/reference material per repository provenance register; exact revision and source-copy analysis remain to be recorded."
+    },
+    {
+      "name": "Cairn server protocol",
+      "url": "https://github.com/oritera/Cairn/blob/main/docs/specs/server-protocol.md",
+      "treatment": "Architecture/reference material per repository provenance register; exact revision and source-copy analysis remain to be recorded."
+    },
+    {
+      "name": "ARTEX",
+      "url": "https://github.com/trhhubsd/ARTEX",
+      "treatment": "Architecture/reference material per repository provenance register; exact revision and source-copy analysis remain to be recorded."
+    }
+  ],
+  "open_review_items": [
+    "Generate an exact SBOM from the final packaged artifact and resolved dependency set.",
+    "Record exact upstream revisions and retrieval dates, then perform a source/artifact comparison.",
+    "Review notices and obligations for the actual redistribution model, including MPL-2.0 and Apache-2.0 dependencies.",
+    "Review the test fixture base image and OS package SBOM if that image is redistributed.",
+    "Obtain a qualified human/legal review and record reviewer, date, disposition, and evidence."
+  ],
+  "legal_approval": "NOT PERFORMED; ART-LICENSE-001 remains IN_PROGRESS"
+}
