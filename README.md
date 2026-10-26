@@ -9,8 +9,6 @@ ARTEMIS is a modular, response-driven application-security testing platform for 
 ARTEMIS uses architectural ideas inspired by the linked projects—Cairn's fact/intent graph and state-space search, and ARTEX's planning/work separation, captured evidence, and durable task history. It does **not** copy their source code.
 
 References:
-- Cairn: https://github.com/oritera/Cairn
-- ARTEX: https://github.com/trhhubsd/ARTEX
 - OWASP Top 10:2025: https://top10.owasp.org/2025/
 - OWASP API Security Top 10: https://owasp.org/www-project-api-security/
 - CWE Top 25:2025: https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25
